@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../Laravel/learn-laravel"
+		},
+		{
+			"path": "../Laravel/seri_webraovat"
+		},
+		{
+			"path": "../Contract"
+		},
+		{
+			"path": "../Template"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}
