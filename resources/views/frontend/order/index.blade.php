@@ -21,7 +21,7 @@
                                     <table id="dataTable3" class="text-center table-business">
                                         <thead class="text-capitalize">
                                             <tr>
-                                                <th>Thao tác</th>
+                                                
                                                 <th>Mã đơn hàng</th>
                                                 <th>Khách hàng</th>
                                                 {{-- <th>Ngày đặt</th> --}}
@@ -37,19 +37,12 @@
                                                 <th>Tiền thuế</th>
                                                 <th>Tiền CK</th>
                                                 <th>Tổng tiền</th> --}}
-                                                
+                                                <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($orders ?? [] as $item)
-                                            <tr>
-                                                <td>
-                                                    <ul class="d-flex justify-content-center">
-                                                        <li class="mr-2"><a href="{{ route('get.order_detail', $item->id) }}" class="text-primary"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                                        <li class="mr-2"><a href="{{ route('get.order_update', $item->id) }}" class="text-primary"><i class="fa fa-edit"></i></a></li>
-                                                        <li><a href="{{ route('get.order_delete', $item->id) }}" class="text-danger"><i class="ti-trash"></i></a></li>
-                                                    </ul>
-                                                </td>
+                                            <tr>                                                
                                                 <td>{{ $item->code_order }}</td>
                                                 <td>{{ $item->customer->name }}</td>
                                                 {{-- <td>{{ $item->order_date }}</td> --}}
@@ -67,9 +60,14 @@
                                                 {{-- <td>1.900.000</td>
                                                 <td>0</td>
                                                 <td>0</td>
-                                                <td>1.900.000</td> --}}
-                                                
-
+                                                <td>1.900.000</td> --}}                                                
+                                                <td>
+                                                    <ul class="d-flex justify-content-center">
+                                                        <li class="mr-2"><a href="{{ route('get.order_detail', $item->id) }}" class="text-primary"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                        <li class="mr-2"><a href="{{ route('get.order_update', $item->id) }}" class="text-primary"><i class="fa fa-edit"></i></a></li>
+                                                        <li><a href="{{ route('get.order_delete', $item->id) }}" class="text-danger"><i class="ti-trash"></i></a></li>
+                                                    </ul>
+                                                </td>
                                             </tr>
                                             @endforeach
                                           

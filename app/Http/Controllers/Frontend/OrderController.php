@@ -59,7 +59,7 @@ class OrderController extends Controller
 
         if(isset($_POST['submit_cancel'])){
             try {
-              
+             
                  $data=[
                 'status' => $request->status,
             ]; 
@@ -72,9 +72,9 @@ class OrderController extends Controller
 
         if(isset($_POST['submit_start'])){
             try {
-              
+             
                  $data=[
-                'status' => $request->status,
+                'status' => $request->status_start,
             ]; 
             Order::find($id)->update($data); 
             return redirect()->back();
