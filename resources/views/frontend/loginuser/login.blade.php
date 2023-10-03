@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="submit-btn-area">
-                            <button id="form_submit" type="submit">SUBMIT<i class="ti-arrow-right"></i></button>
+                            <button id="form_submit" type="submit">Đăng nhập<i class="ti-arrow-right"></i></button>
                             {{-- <div class="login-other row mt-4">
                                 <div class="col-6">
                                     <a class="fb-login" href="#">Đăng nhập bằng <i class="fa fa-facebook"></i></a>
@@ -85,7 +85,7 @@
                             </div> --}}
                         </div>
                         <div class="form-footer text-center mt-5">
-                            <p class="text-muted">Không có tài khoản? <a href="register.html">Liên hệ với Admin</a></p>
+                            {{-- <p class="text-muted">Không có tài khoản? <a href="register.html">Liên hệ với Admin</a></p> --}}
                         </div>
                     </div>
                 </form>

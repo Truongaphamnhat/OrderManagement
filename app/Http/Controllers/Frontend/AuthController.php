@@ -17,8 +17,7 @@ class AuthController extends Controller
 
     public function postLogin(LoginUserRequest $request)
     {
-
-        // dd($request->all());
+      // dd($request->all());
         $credentials = [
             'email' => $request->email,
             'password' =>  $request->password,
@@ -27,7 +26,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             return redirect()->route('get.index');
         }
-
+        toastr()->error('Email hoặc mật khẩu sai!', 'Thông báo', ['timeOut' => 5000]);
         return redirect()->back();
     }
 

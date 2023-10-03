@@ -295,7 +295,7 @@
                                             <div class="progress-bar bg-danger" style="width: 100%">Đã hủy</div>
                                         </div>                                                                               
                                         @endif
-
+                                     {{-- Xử lí button trạng thái --}}
                                         <div class="row">
                                             <div class="col-10">
                                                 <div class="form-group">
@@ -317,29 +317,27 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            <div class="col-1">
+                                            <div class="col-1.9">
                                                 <div class="form-group">
                                                     <form action="" method="post" >
                                                     @csrf
                                                         @if($orders->status == 0)
-                                                        <input type="hidden" name="status" value="1">
+                                                            <input type="hidden" name="status_start" value="1">
                                                             <button type="submit"  name="submit_start" class="btn btn-xs btn-outline-dark mb-3 mt-3" >Quay lại tiến độ</button>
                                                         @else
-                                                            <button type="submit"  name="submit_start" class="btn btn-xs btn-outline-dark mb-3 mt-3" hidden >Cập nhật tiến độ</button>
+                                                            <button type="submit"  name="submit_start" class="btn btn-xs btn-outline-dark mb-3 mt-3" disabled >Cập nhật tiến độ</button>
+                                                        @endif
+
+                                                        @if($orders->status == 5)
+                                                            <button type="submit"  name="submit_cancel" class="btn btn-xs btn-outline-dark mb-3 mt-3" disabled>Hủy đơn</button>
+                                                        @else
+                                                            <input type="hidden" name="status" value="0">
+                                                            <button type="submit"  name="submit_cancel" class="btn btn-xs btn-outline-dark mb-3 mt-3" >Hủy đơn</button>
                                                         @endif
                                                     </form>     
                                                 </div>
                                             </div>
-                                            <div class="col-1">
-                                                <div class="form-group">
-                                                    <form action="" method="post" >
-                                                    @csrf
-                                                        <input type="hidden" name="status" value="0">
-                                                        <button type="submit"  name="submit_cancel" class="btn btn-xs btn-outline-dark mb-3 mt-3" >Hủy đơn</button>
-
-                                                    </form>     
-                                                </div>
-                                            </div>
+                                         
                                         </div>
                                     </div>
                                 </div>
