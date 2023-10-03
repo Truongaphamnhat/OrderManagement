@@ -131,7 +131,7 @@
                                 <a class="dropdown-item profile-option" href="#">Cài đặt Email</a>
                                 <a class="dropdown-item profile-option" href="#">Hòm thư</a>
                                 <a class="dropdown-item profile-option" href="#">Trợ giúp</a>
-                                <a class="dropdown-item profile-option" href="#">Thoát</a>
+                                <a class="dropdown-item profile-option" href="{{ route ('get_user.logout') }}">Thoát</a>
                             </div>
                         </div>
                     </div>
