@@ -378,15 +378,15 @@
                                                 <th>Thao tác</th>
                                                 {{-- <th>Mã hàng hóa</th> --}}
                                                 <th>Tên hàng hóa</th>
-                                                <th>Mô tả</th>
+                                                <th>Số lượng</th>
                                                 <th>Xuất xứ</th>
                                                 <th>Hãng SX</th>
-                                                <th>Bảo hành</th>
+                                                {{-- <th>Bảo hành</th> --}}
                                                 <th>Đơn vị tính</th>
-                                                <th>Giá nhập</th>
+                                                {{-- <th>Giá nhập</th>
                                                 <th>Giá xuất</th>
                                                 <th>Tỉ lệ vênh</th>
-                                                <th>Thuế</th>
+                                                <th>Thuế</th> --}}
                                                 <th>Thành tiền</th>
                                             </tr>
                                         </thead>
@@ -400,15 +400,15 @@
                                                 {{-- <td>{{ $item->goods_code }} </td> --}}
                                                 <td ><input class="form-control" type="text" value="{{  $item->goods->name }}" readonly></td>
 
-                                                <td>{{ $item->goods->describe }}</td>
+                                                <td>{{ $item->quantity }}</td>
                                                 <td>{{ $item->goods->origin }}</td>
                                                 <td>{{ $item->goods->manufacturer }}</td>
-                                                <td>{{ $item->goods->guarantee }}</td>
+                                                {{-- <td>{{ $item->goods->guarantee }}</td> --}}
                                                 <td>{{ $item->goods->unit }}</td>
-                                                <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
+                                                {{-- <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
                                                 <td>{{ number_format($item->goods->output_price, 0, ',', '.') }}</td>
-                                                <td>{{ number_format($item->goods->markup_ratio, 0, ',', '.') }}</td>
-                                                <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td>
+                                                <td>{{ number_format($item->goods->markup_ratio, 0, ',', '.') }}</td> --}}
+                                                {{-- <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td> --}}
                                                 <td>{{ $item->goods->total }}</td>
                                             </tr>
                                             @endforeach      
@@ -424,15 +424,15 @@
                                                 {{-- <td>{{ $item->goods_code }} </td> --}}
                                                 <td ><input name="goods_name" class="form-control" type="text" value="{{  $item->goods->name }}" readonly></td>
 
-                                                <td>{{ $item->goods->describe }}</td>
+                                                <td>{{ $item->quantity }}</td>
                                                 <td>{{ $item->goods->origin }}</td>
                                                 <td>{{ $item->goods->manufacturer }}</td>
-                                                <td>{{ $item->goods->guarantee }}</td>
+                                                {{-- <td>{{ $item->goods->guarantee }}</td> --}}
                                                 <td>{{ $item->goods->unit }}</td>
-                                                <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
+                                                {{-- <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
                                                 <td>{{ number_format($item->goods->output_price, 0, ',', '.') }}</td>
                                                 <td>{{ number_format($item->goods->markup_ratio, 0, ',', '.') }}</td>
-                                                <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td>
+                                                <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td> --}}
                                                 <td>{{ $item->goods->total }}</td>
                                             </tr>
                                             @endforeach      
@@ -455,17 +455,20 @@
                          $totalOrder_price1 = 0;            // Biến lưu tổng giá trị đơn hàng
                          $count1 = 0;
                          $avgTax1 = 0;
+                         $total_price1=0;
 
                          $totalOutput_price2 = 0;                     // Biến lưu tổng tiền hàng
                          $totalTax2 = 0;                     // Biến lưu tổng thuế
                          $totalOrder_price1 = 0;            // Biến lưu tổng giá trị đơn hàng
                          $count2 = 0;
                          $avgTax2 = 0;
+                         $total_price2=0;
                      @endphp
                      @foreach ($order_detail_has_id ?? [] as $item)
                          @php
                              $count1++;
                              $totalOutput_price1 += ($item->goods->output_price );
+                             $total_price1 +=($item->goods->total );
                              $totalTax1 += $item->goods->tax;
                              $avgTax1 = $totalTax1 / $count1;
                              $totalOrder_price1 = $totalOutput_price1 + $totalOutput_price1*$avgTax1/100;
@@ -476,6 +479,7 @@
                      @php
                          $count2++;
                          $totalOutput_price2 += ($item->goods->output_price );
+                         $total_price2 +=($item->goods->total );
                          $totalTax2 += $item->goods->tax;
                          $avgTax2 = $totalTax2 / $count2;
                          $totalOrder_price2 = $totalOutput_price2 + $totalOutput_price2*$avgTax2/100;
@@ -485,6 +489,7 @@
                 @php
                     $count= $count1+$count2;
                     $totalOutput_price = $totalOutput_price1 + $totalOutput_price2;
+                    $total_price = $total_price1 + $total_price2;
                     $totalTax = $totalTax1 + $totalTax2;
                     $avgTax = $totalTax / $count;
                     $totalOrder_price = $totalOutput_price + $totalOutput_price * $avgTax / 100 ;
@@ -501,7 +506,7 @@
                                
                                  {{-- <span>{{ number_format($totalOutput_price, 0, ',', '.') }}</span><br>
                                  <span>{{ number_format($avgTax, 0, ',', '.') }}</span><br> --}}
-                                 <span>{{ number_format($totalOutput_price, 0, ',', '.') }}</span>
+                                 <span>{{ number_format($total_price, 0, ',', '.') }}</span>
                              </div>
                          </div>
                      </div>

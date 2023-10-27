@@ -47,6 +47,7 @@
                                                        
                                                                     </ul>
                                                                     <input name="goods_id" type="hidden" value="{{  $item->id }}"  >  
+                                                                    <input name="price"    type="hidden" value="{{ $item->total }}" >
                                                                 </td>
                                                               
                                                                 </form>

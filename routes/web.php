@@ -236,6 +236,8 @@ Route::group(['namespace' => 'Frontend', 'middleware' => 'check.login.user'], fu
 
     Route::get('order/delete/{id}', [FrontendOrderController::class, 'delete'])->name('get.order_delete');
 
+    Route::get('order/pdf/{id}', [FrontendOrderController::class, 'pdf'])->name('get.order_pdf');
+
     // // Goods (Hàng hóa)
         // Chọn hàng hóa
     Route::get('order/form_goods', [FrontendOrderController::class, 'goods_selecttion_create'])->name('get.order_goods_create');

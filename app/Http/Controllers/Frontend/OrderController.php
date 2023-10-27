@@ -18,6 +18,10 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Dompdf\Dompdf;
+use Exception;
+use Dompdf\Options;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -225,7 +229,8 @@ class OrderController extends Controller
            
             Order::where('id', Order::max('id'))->update($data); 
             // Order::create($data);
-            $data1=['order_id'=>$request->order_id,];
+            $data1=['order_id'=>$request->order_id,
+                    ];
             Order_goods_detail::where('order_id', 0)->update($data1);
         
         } catch (\Exception $exception) {
@@ -278,15 +283,16 @@ class OrderController extends Controller
            
             Order::find($id)->update($data); 
             // Order::create($data);
-            $data1=['order_id'=>$request->order_id,];
+            $data1=['order_id'=>$id,
+                    ];
             Order_goods_detail::where('order_id', 0)->update($data1);
         
         } catch (\Exception $exception) {
             Log::error("ERROR => OrderController@update => " . $exception->getMessage());
-            toastr()->error('Thêm mới thất bại!', 'Thông báo', ['timeOut' => 2000]);
+            toastr()->error('Cập nhật thất bại!', 'Thông báo', ['timeOut' => 2000]);
             return redirect()->route('get.order_update', $id);
         }
-            toastr()->success('Thêm mới thành công!', 'Thông báo', ['timeOut' => 2000]);
+            toastr()->success('Cập nhật thành công!', 'Thông báo', ['timeOut' => 2000]);
             return redirect()->route('get.order_index');
     }
 
@@ -307,4 +313,31 @@ class OrderController extends Controller
         toastr()->success('Xóa thành công!', 'Thông báo', ['timeOut' => 2000]);
         return redirect()->route('get.order_index');
     }
+
+    public function pdf($orderId)
+    {
+        // Lấy dữ liệu từ cơ sở dữ liệu
+        $orders = Order::findOrFail($orderId);
+        $goods = Goods::all();
+        $order_detail_has_id = Order_goods_detail::where('order_id', $orderId)->get();
+
+        // Tạo một đối tượng Dompdf
+        $dompdf = new Dompdf();
+
+        // Render template PDF từ dữ liệu
+        $html = view('frontend.order.pdf', compact('orders', 'goods', 'order_detail_has_id'))->render();
+
+        // Gán HTML vào Dompdf
+        $dompdf->loadHtml($html);     
+
+        // Cấu hình Dompdf (tuỳ chọn)
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render PDF
+        $dompdf->render();
+
+        // Xuất file PDF
+        $dompdf->stream('order_detail '.$orders->code_order.'.pdf');
+    }
 }
+

@@ -75,9 +75,9 @@ class CustomerController extends Controller
 
             $customer = Customer::create($data);
         } catch (\Exception $exception) {
-            Log::error("ERROR => CustomerController@store => " . $exception->getMessage());
+            // Log::error("ERROR => CustomerController@store => " . $exception->getMessage());
             toastr()->error('Thêm mới thất bại!', 'Thông báo', ['timeOut' => 2000]);
-            return redirect()->route('frontend.customer.create');
+            return redirect()->route('get.customer_create');
         }
         toastr()->success('Thêm mới thành công!', 'Thông báo', ['timeOut' => 2000]);
         return redirect()->route('get.index');
@@ -147,9 +147,9 @@ class CustomerController extends Controller
 
             Customer::find($id)->update($data);
         } catch (\Exception $exception) {
-            Log::error("ERROR => CustomerController@update => " . $exception->getMessage());
+            // Log::error("ERROR => CustomerController@update => " . $exception->getMessage());
             toastr()->error('Cập nhật thất bại!', 'Thông báo', ['timeOut' => 2000]);
-            return redirect()->route('get.category_update', $id);
+            return redirect()->route('get.customer_update', $id);
         }
         toastr()->success('Cập nhật thành công!', 'Thông báo', ['timeOut' => 2000]);
         return redirect()->route('get.index');

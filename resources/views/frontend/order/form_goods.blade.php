@@ -49,6 +49,7 @@
                                                                     
                                                                 </td>
                                                                 <input name="goods_id" type="hidden" value="{{  $item->id }}"  >
+                                                                <input name="price"    type="hidden" value="{{ $item->total }}" >
                                                                 </form>
                                                             <td>{{ $item->id }}</td>
                                                             <td>{{ $item->name }}</td>
