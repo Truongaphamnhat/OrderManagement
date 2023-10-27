@@ -301,7 +301,7 @@
                                         
                                         <div class="form-group">
                                             <label for="customer_tax" class="col-form-label input-label">Mã số thuế</label>
-                                            <input class="form-control" type="text" id="customer_tax" value="" type="text"  readonly>
+                                            <input class="form-control" type="text" id="customer_tax_code" value="" type="text"  readonly>
                                         
                                         </div>
                                         <div class="form-group">
@@ -380,15 +380,16 @@
                                                 <th>Thao tác</th>
                                                 {{-- <th>Mã hàng hóa</th> --}}
                                                 <th>Tên hàng hóa</th>
-                                                <th>Mô tả</th>
+                                                <th>Số lượng</th>
+                                                {{-- <th>Mô tả</th> --}}
                                                 <th>Xuất xứ</th>
                                                 <th>Hãng SX</th>
                                                 <th>Bảo hành</th>
                                                 <th>Đơn vị tính</th>
-                                                <th>Giá nhập</th>
+                                                {{-- <th>Giá nhập</th>
                                                 <th>Giá xuất</th>
                                                 <th>Tỉ lệ vênh</th>
-                                                <th>Thuế</th>
+                                                <th>Thuế</th> --}}
                                                 <th>Thành tiền</th>
                                             </tr>
                                         </thead>
@@ -404,15 +405,16 @@
                                                 {{-- <td>{{ $item->goods_code }} </td> --}}
                                                 {{-- <td name="goods_name"></td> --}}
                                                 <td ><input name="goods_name" class="form-control" type="text" value="{{  $item->goods->name }}" readonly></td>
-                                                <td>{{ $item->goods->describe }}</td>
+                                                <td>{{ $item->quantity }}</td>
+                                                {{-- <td>{{ $item->goods->describe }}</td> --}}
                                                 <td>{{ $item->goods->origin }}</td>
                                                 <td>{{ $item->goods->manufacturer }}</td>
                                                 <td>{{ $item->goods->guarantee }}</td>
                                                 <td>{{ $item->goods->unit }}</td>                                               
-                                                <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
+                                                {{-- <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
                                                 <td>{{ number_format($item->goods->output_price, 0, ',', '.') }}</td>
                                                 <td>{{ number_format($item->goods->markup_ratio, 0, ',', '.') }}</td>
-                                                <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td>
+                                                <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td> --}}
                                                 <td>{{ $item->goods->total }}</td>
                                             </tr>
                                             @endforeach      
@@ -434,11 +436,13 @@
                         $totalOrder_price = 0;            // Biến lưu tổng giá trị đơn hàng
                         $count = 0;
                         $avgTax = 0;
+                        $total_price = 0;
                     @endphp
                     @foreach ($order_detail ?? [] as $item)
                         @php
                             $count++;
                             $totalOutput_price += ($item->goods->output_price );
+                            $total_price += ($item->goods->total);
                             $totalTax += $item->goods->tax;
                             $avgTax = $totalTax / $count;
                             $totalOrder_price = $totalOutput_price + $totalOutput_price*$avgTax/100;
@@ -457,7 +461,7 @@
                               
                                 {{-- <span>{{ number_format($totalOutput_price, 0, ',', '.') }}</span><br>
                                 <span>{{ number_format($avgTax, 0, ',', '.') }}</span><br> --}}
-                                <span>{{ number_format($totalOutput_price, 0, ',', '.') }}</span>
+                                <span>{{ number_format($total_price, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>

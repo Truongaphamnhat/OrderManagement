@@ -15,12 +15,9 @@
                                                 <a href="{{ route('get.order_update', $orders->id ) }}">
                                                     <button type="button" class="btn btn-addorder btn-back"><i class="fa fa-edit"></i></i><span>Sửa</span></button>
                                                 </a>
-                                                {{-- <a href="{{ route('get.order_print') }}">
-                                                    <button type="button" class="btn btn-addorder"><i class="fa fa-print" aria-hidden="true"></i><span>In đơn hàng</span></button>
-                                                </a> --}}
-                                                {{-- <a href="../Contract/addnewContract.php">
-                                                    <button type="button" class="btn btn-addorder"><i class="fa fa-folder-open" aria-hidden="true"></i><span>Sinh hợp đồng</span></button>
-                                                </a> --}}
+                                                <a href="{{ route('get.order_pdf', $orders->id) }}">
+                                                    <button type="button" class="btn btn-addorder"><i class="fa fa-print" aria-hidden="true"></i><span>Xuất file PDF</span></button>
+                                                </a>
                                                 <a href="{{ route('get.order_index') }}">
                                                     <button type="button" class="btn btn-addorder btn-back"><i class="fa fa-chevron-left" aria-hidden="true"></i><span>Trở về</span></button>
                                                 </a>
@@ -357,34 +354,34 @@
                                             <table id="dataTable3" class="text-center table-business">
                                                 <thead class="text-capitalize">
                                                     <tr>
-                                                        <th>Mã hàng hóa</th>
+                                                        {{-- <th>Mã hàng hóa</th> --}}
                                                         <th>Tên hàng hóa</th>
-                                                        <th>Mô tả</th>
+                                                        <th>Số lượng</th>
                                                         <th>Xuất xứ</th>
                                                         <th>Hãng SX</th>
                                                         <th>Bảo hành</th>
                                                         <th>Đơn vị tính</th>
-                                                        <th>Giá nhập</th>
+                                                        {{-- <th>Giá nhập</th>
                                                         <th>Giá xuất</th>
                                                         <th>Tỉ lệ vênh</th>
-                                                        <th>Thuế</th>
+                                                        <th>Thuế</th> --}}
                                                         <th>Thành tiền</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($order_detail_has_id ?? [] as $item)
                                                     <tr>
-                                                        <td>{{ $item->id }} </td>
+                                                        {{-- <td>{{ $item->id }} </td> --}}
                                                         <td>{{  $item->goods->name }}</td>
-                                                        <td>{{ $item->goods->describe }}</td>
+                                                        <td>{{ $item->quantity}}</td>
                                                         <td>{{ $item->goods->origin }}</td>
                                                         <td>{{ $item->goods->manufacturer }}</td>
                                                         <td>{{ $item->goods->guarantee }}</td>
                                                         <td>{{ $item->goods->unit }}</td>
-                                                        <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
+                                                        {{-- <td>{{ number_format($item->goods->input_price, 0, ',', '.') }}</td>
                                                         <td>{{ number_format($item->goods->output_price, 0, ',', '.') }}</td>
                                                         <td>{{ number_format($item->goods->markup_ratio, 0, ',', '.') }}</td>
-                                                        <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td>
+                                                        <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td> --}}
                                                         <td>{{ $item->goods->total }}</td>
                                                     </tr>
                                                     
@@ -404,11 +401,13 @@
                     $totalOrder_price = 0;            // Biến lưu tổng giá trị đơn hàng
                     $count = 0;
                     $avgTax = 0;
+                    $total_price = 0;
                 @endphp
                 @foreach ($order_detail_has_id ?? [] as $item)
                     @php
                         $count++;
                         $totalOutput_price += ($item->goods->output_price );
+                        $total_price += ($item->goods->total);
                         $totalTax += $item->goods->tax;
                         $avgTax = $totalTax / $count;
                         $totalOrder_price = $totalOutput_price + $totalOutput_price*$avgTax/100;
@@ -427,7 +426,7 @@
                           
                             {{-- <span>{{ number_format($totalOutput_price, 0, ',', '.') }}</span><br>
                             <span>{{ number_format($avgTax, 0, ',', '.') }}</span><br> --}}
-                            <span>{{ number_format($totalOutput_price, 0, ',', '.') }}</span>
+                            <span>{{ number_format($total_price, 0, ',', '.') }}</span>
                         </div>
                     </div>
                 </div>
