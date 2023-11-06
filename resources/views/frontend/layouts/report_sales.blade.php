@@ -62,7 +62,7 @@
                                 <ul class="collapse">
                                     <li><a href="{{ route('get.index') }}">Khách hàng</a></li>
                                     <li><a href="{{ route('get.contact_index') }}">Liên hệ với khách hàng</a></li>
-                                    <li class="active"><a href="{{ route('get.category_index') }}">List khách hàng</a></li>
+                                    <li ><a href="{{ route('get.category_index') }}">List khách hàng</a></li>
                                     <li><a href="{{ route('get.representer_index') }}">Người đại diện</a></li>
                                 </ul>
                             </li>
@@ -84,7 +84,7 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-bar-chart"
                                         aria-hidden="true"></i> <span>Báo cáo</span></a>
                                     <ul class="collapse">
-                                        <li><a href="{{ route('get.barchart') }}">Doanh số bán hàng</a></li>
+                                        <li class="active"><a href="{{ route('get.barchart') }}">Doanh số bán hàng</a></li>
                                     </ul>
                             </li>
 
@@ -117,8 +117,8 @@
                             <h4 class="page-title pull-left">Dashboard</h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="/">Home</a></li>
-                                <li><a href="{{ route('get.index') }}">Khách Hàng</a></li>
-                                <li><span>List Khách Hàng</span></li>
+                                <li><a href="{{ route('get.barchart') }}">Báo cáo</a></li>
+                                <li><span>Doanh số bán hàng</span></li>
                             </ul>
                         </div>
                     </div>

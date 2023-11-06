@@ -18,6 +18,7 @@ use App\Http\Controllers\Frontend\ContractGoodsDetailController as FrontendContr
 
 use App\Http\Controllers\Frontend\ContactController as FrontendContactController;
 use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
+use App\Http\Controllers\Frontend\ChartController as FrontendChartController;
 
 use App\Models\Position;
 
@@ -283,6 +284,8 @@ Route::group(['namespace' => 'Frontend', 'middleware' => 'check.login.user'], fu
     Route::post('contract_goods_detail/create', [FrontendContractGoodsDetailController::class, 'store'])->name('get.contract_goods_detail_store');
 
     // Route::get('contract_goods_detail/delete/{id}', [FrontendContractGoodsDetailController::class, 'delete'])->name('get.contract_goods_detail_delete');
+    //Báo cáo
+    Route::get('chart/barchrt', [FrontendChartController::class, 'barchart'])->name('get.barchart');
 
 });
 
@@ -293,6 +296,3 @@ Route::group(['namespace' => 'Frontend', 'prefix' => 'authuser'], function(){
     Route::post('login', [FrontendAuthController::class, 'postLogin']);
 });
 
-// Route::get('login', function(){
-//     return view('frontend/loginuser/login');
-// });

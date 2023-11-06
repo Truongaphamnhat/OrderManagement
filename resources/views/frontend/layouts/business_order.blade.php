@@ -57,6 +57,7 @@
                                     <li><a href="{{ route('get.index') }}">Khách hàng</a></li>
                                     <li><a href="{{ route('get.contact_index') }}">Liên hệ với khách hàng</a></li>
                                     <li><a href="{{ route('get.category_index') }}">List khách hàng</a></li>
+                                    <li><a href="{{ route('get.representer_index') }}">Người đại diện</a></li>
                                 </ul>
                             </li>
 
@@ -76,7 +77,7 @@
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Báo cáo</span></a>
                                 <ul class="collapse">
-                                    <li><a href="#">Biểu đồ</a></li>
+                                    <li><a href="{{ route('get.barchart') }}">Doanh số bán hàng</a></li>
                                 </ul>
                             </li>
 
