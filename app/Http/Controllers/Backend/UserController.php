@@ -43,7 +43,7 @@ class UserController extends Controller
 
             $data = $request->except('_token', 'avatar', 'user_type'); 
             $data['created_at'] = Carbon::now();
-            $data['password'] = Carbon::now(); // Mã hóa password, vì tạo trường password không được để trống bên databases
+            $data['password'] = bcrypt('123456789'); // Mã hóa password, vì tạo trường password không được để trống bên databases
             $data['status'] = 1;
             $data['email_verified_at'] = Carbon::now(); 
 
