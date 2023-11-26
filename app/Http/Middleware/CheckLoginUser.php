@@ -25,7 +25,7 @@ class CheckLoginUser
 
             $checkRole = User::where('id', $userLogin->id)
                 ->whereHas('userType', function ($query) {
-                    $query->whereIn('name', [User::ROLE_USER]); // Muốn User vào thì |  [User::ROLE_ADMIN, User::ROLE_USER]
+                    $query->whereIn('name', [User::ROLE_USER, User::ROLE_ADMIN]); // Muốn User vào thì |  [User::ROLE_ADMIN, User::ROLE_USER]
                 })->first();
 
             if (empty($checkRole)) return redirect()->route('get_user.login');
