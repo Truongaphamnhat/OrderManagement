@@ -382,7 +382,7 @@
                                                         <td>{{ number_format($item->goods->output_price, 0, ',', '.') }}</td>
                                                         <td>{{ number_format($item->goods->markup_ratio, 0, ',', '.') }}</td>
                                                         <td>{{ number_format($item->goods->tax, 0, ',', '.') }}</td> --}}
-                                                        <td>{{ $item->goods->total }}</td>
+                                                        <td>{{ $item->price}}</td>
                                                     </tr>
                                                     
                                                     @endforeach

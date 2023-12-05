@@ -44,8 +44,8 @@
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->address }}</td>
                                                 <td>{{ $item->gender }}</td>
-                                                <td>{{ $item->tel }}</td>                                                
-                                                <td>{{ $item->date }}</td>
+                                                <td>{{ $item->phone }}</td>                                                
+                                                <td>{{ $item->birthday }}</td>
                                                 <td>
                                                     <ul class="d-flex justify-content-center">
                                                         <li class="mr-2"><a href="{{ route ('get.contact_detail', $item->id) }}" class="text-primary"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
